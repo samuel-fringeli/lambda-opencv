@@ -1,4 +1,4 @@
-FROM amazonlinux
+FROM --platform=linux/arm64 amazonlinux:2
 
 RUN yum update -y
 RUN yum install gcc openssl-devel bzip2-devel libffi-devel wget tar gzip zip make zlib-devel -y
@@ -29,7 +29,7 @@ RUN make altinstall
 
 # Install Python packages
 RUN mkdir /packages
-RUN echo "opencv-python" >> /packages/requirements.txt
+RUN echo "opencv-python-headless==4.10.0.84" >> /packages/requirements.txt
 RUN mkdir -p /packages/opencv-python-3.7/python/lib/python3.7/site-packages
 RUN mkdir -p /packages/opencv-python-3.8/python/lib/python3.8/site-packages
 RUN mkdir -p /packages/opencv-python-3.9/python/lib/python3.9/site-packages
